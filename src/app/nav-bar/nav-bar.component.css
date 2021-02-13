@@ -15,7 +15,7 @@ li:last-child {
   border-right: none;
 }
 
-li a {
+li {
   display: block;
   color: white;
   text-align: center;
@@ -23,7 +23,7 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+li:hover:not(.active) {
   background-color: #111;
 }
 

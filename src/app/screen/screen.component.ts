@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared.service';
+import { Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-screen',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScreenComponent implements OnInit {
 
-  constructor() { }
+  clickEventSubscription:Subscription;
+
+  constructor(private sharedService:SharedService) {
+    this.clickEventSubscription = this.sharedService.getClickEvent().subscribe((x)=>{
+      console.log(x);
+    })
+   }
 
   ngOnInit() {
   }
+
+
 
 }
