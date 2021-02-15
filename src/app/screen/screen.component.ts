@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { Subscription} from 'rxjs';
+import { getAnimationForMergeSort } from './Algorithm';
 
 @Component({
   selector: 'app-screen',
@@ -23,6 +24,18 @@ export class ScreenComponent implements OnInit {
         case "re-define":{
           this.resetArray();
         }
+        case "merg":{
+          this.mergShort();
+        }
+        case "quick":{
+
+        }
+        case "bubble":{
+
+        }
+        case "heap":{
+
+        }
       }
     })
    }
@@ -33,7 +46,12 @@ export class ScreenComponent implements OnInit {
       array.push(this.randomIntFromInterval(5, 730));
     }
     this.Array = array;
-    console.log(this.Array);
+   }
+
+   mergShort(){
+    let AllBars = document.getElementsByClassName("array-bar");
+    let animations = getAnimationForMergeSort(this.Array);
+    console.log(animations);
    }
 
   ngOnInit() {
