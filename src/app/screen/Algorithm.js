@@ -1,14 +1,18 @@
-// let animations = [];
+let animations = [];
+let finalAnimations = [];
 
-// export function getAnimationForMergeSort(unsortedArray){
-//   if (unsortedArray.length <= 1) {
-//     return unsortedArray;
-//   }
-//   const auxiliaryArray = unsortedArray.slice();
-//   mergeSort(unsortedArray,0,unsortedArray.length-1,auxiliaryArray);
-//   console.log( "After Sorting" + unsortedArray);
-//   return animations;
-// }
+export function getAnimationForMergeSort(unsortedArray){
+  // const auxiliaryArray = unsortedArray.slice();
+  // mergeSort(unsortedArray,0,unsortedArray.length-1,auxiliaryArray);
+  // console.log( "After Sorting" + unsortedArray);
+  // return animations;
+  console.log(unsortedArray);
+  console.log(mergeSort(unsortedArray));
+  console.log(animations);
+  getIndexOfAnimations(animations,unsortedArray);
+  console.log(finalAnimations);
+  return finalAnimations;
+}
 
 // function mergeSort (unsortedArray,startIndex,endIndex,auxArray) {
 //     if (startIndex === endIndex) return;
@@ -56,83 +60,90 @@
 //     console.log("Interation: " + array);
 //   }
 
+//
+// Merge Sort Implentation (Recursion)
+//
 
-export function getAnimationForMergeSort(array) {
-  const animations = [];
-  if (array.length <= 1) return array;
-  const auxiliaryArray = array.slice();
-  mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
-  console.log(array);
-  return animations;
+function mergeSort (unsortedArray) {
+  // No need to sort the array if the array only has one element or empty
+  if (unsortedArray.length <= 1) {
+    return unsortedArray;
+  }
+  // In order to divide the array in half, we need to figure out the middle
+  const middle = Math.floor(unsortedArray.length / 2);
+
+  // This is where we will be dividing the array into left and right
+  const left = unsortedArray.slice(0, middle);
+  const right = unsortedArray.slice(middle);
+
+  // Using recursion to combine the left and right
+  return merge(
+    mergeSort(left), mergeSort(right)
+  );
 }
 
-function mergeSortHelper(
-  mainArray,
-  startIdx,
-  endIdx,
-  auxiliaryArray,
-  animations,
-) {
-  if (startIdx === endIdx) return;
-  const middleIdx = Math.floor((startIdx + endIdx) / 2);
-  mergeSortHelper(auxiliaryArray, startIdx, middleIdx, mainArray, animations);
-  mergeSortHelper(auxiliaryArray, middleIdx + 1, endIdx, mainArray, animations);
-  doMerge(mainArray, startIdx, middleIdx, endIdx, auxiliaryArray, animations);
-}
+// Merge the two arrays: left and right
+function merge (left, right) {
+  let resultArray = [], leftIndex = 0, rightIndex = 0;
 
-function doMerge(
-  mainArray,
-  startIdx,
-  middleIdx,
-  endIdx,
-  auxiliaryArray,
-  animations,
-) {
-  let k = startIdx;
-  let i = startIdx;
-  let j = middleIdx + 1;
-  while (i <= middleIdx && j <= endIdx) {
-    // These are the values that we're comparing; we push them once
-    // to change their color.
-    animations.push([i, j]);
-    // These are the values that we're comparing; we push them a second
-    // time to revert their color.
-    animations.push([i, j]);
-    if (auxiliaryArray[i] <= auxiliaryArray[j]) {
-      // We overwrite the value at index k in the original array with the
-      // value at index i in the auxiliary array.
-      animations.push([k, auxiliaryArray[i]]);
-      mainArray[k++] = auxiliaryArray[i++];
+  // We will concatenate values into the resultArray in order
+  while (leftIndex < left.length && rightIndex < right.length) {
+      animations.push(["highLight",left[leftIndex],right[rightIndex]]);
+      animations.push(["highLight",left[leftIndex],right[rightIndex]]);
+
+    if (left[leftIndex] < right[rightIndex]) {
+      resultArray.push(left[leftIndex]);
+      animations.push(["swap",right[rightIndex],left[leftIndex]]);
+      leftIndex++; // move left array cursor
     } else {
-      // We overwrite the value at index k in the original array with the
-      // value at index j in the auxiliary array.
-      animations.push([k, auxiliaryArray[j]]);
-      mainArray[k++] = auxiliaryArray[j++];
+      resultArray.push(right[rightIndex]);
+      animations.push(["swap",left[leftIndex],right[rightIndex]]);
+			rightIndex++; // move right array cursor
     }
   }
-  while (i <= middleIdx) {
-    // These are the values that we're comparing; we push them once
-    // to change their color.
-    animations.push([i, i]);
-    // These are the values that we're comparing; we push them a second
-    // time to revert their color.
-    animations.push([i, i]);
-    // We overwrite the value at index k in the original array with the
-    // value at index i in the auxiliary array.
-    animations.push([k, auxiliaryArray[i]]);
-    mainArray[k++] = auxiliaryArray[i++];
-  }
-  while (j <= endIdx) {
-    // These are the values that we're comparing; we push them once
-    // to change their color.
-    animations.push([j, j]);
-    // These are the values that we're comparing; we push them a second
-    // time to revert their color.
-    animations.push([j, j]);
-    // We overwrite the value at index k in the original array with the
-    // value at index j in the auxiliary array.
-    animations.push([k, auxiliaryArray[j]]);
-    mainArray[k++] = auxiliaryArray[j++];
-  }
-  console.log("After Iteration : " + auxiliaryArray);
+
+  // We need to concat to the resultArray because there will be one element left over after the while loop
+  // return resultArray
+  //         .concat(left.slice(leftIndex))
+  //         .concat(right.slice(rightIndex));
+  left.slice(leftIndex).forEach(element => {
+    animations.push(["highLight",element,element]);
+    animations.push(["highLight",element,element]);
+    resultArray.push(element);
+    animations.push(["swap",element,element]);
+  });
+
+  right.slice(rightIndex).forEach(element => {
+    animations.push(["highLight",element,element]);
+    animations.push(["highLight",element,element]);
+    resultArray.push(element);
+    animations.push(["swap",element,element]);
+  });
+
+  return resultArray;
+}
+
+function getIndexOfAnimations(animate,array)
+{
+  // for(let i = 0; i< animate.length; i++)
+  // {
+  //   let temp1 = array.findIndex(x => x === animate[i][0]);
+  //   let temp2 = array.findIndex(x => x === animate[i][1]);
+  //   finalAnimations.push([temp1,temp2]);
+  // }
+
+  animate.forEach(element => {
+      if(element[0] === "highLight")
+      {
+        let temp1 = array.findIndex(x => x === element[1]);
+        let temp2 = array.findIndex(x => x === element[2]);
+        finalAnimations.push([temp1,temp2]);
+      }
+      else
+      {
+        let temp1 = array.findIndex(x => x === element[1]);
+        let temp2 = element[2];
+        finalAnimations.push([temp1,temp2]);
+      }
+  });
 }
