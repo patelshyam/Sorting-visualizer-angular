@@ -10,7 +10,7 @@ import { getAnimationForMergeSort } from './Algorithm';
 })
 export class ScreenComponent implements OnInit {
 
-   NUMBER_OF_ARRAY_BARS = 5;
+   NUMBER_OF_ARRAY_BARS = 300;
 
    Array = [];
 
@@ -30,18 +30,20 @@ export class ScreenComponent implements OnInit {
       switch(shortType){
         case "re-define":{
           this.resetArray();
+          break;
         }
         case "merg":{
           this.mergShort();
+          break;
         }
         case "quick":{
-
+          break;
         }
         case "bubble":{
-
+          break;
         }
         case "heap":{
-
+          break;
         }
       }
     })
@@ -49,19 +51,9 @@ export class ScreenComponent implements OnInit {
 
    resetArray(){
     const array = [];
-    array.push(100);
-    array.push(10);
-    array.push(90);
-    array.push(20);
-    array.push(80);
-    array.push(30);
-    array.push(70);
-    array.push(40);
-    array.push(60);
-    array.push(50);
-    // for (let i = 0; i < this.NUMBER_OF_ARRAY_BARS; i++) {
-    //   array.push(this.randomIntFromInterval(5, 730));
-    // }
+    for (let i = 0; i < this.NUMBER_OF_ARRAY_BARS; i++) {
+      array.push(this.randomIntFromInterval(5, 730));
+    }
     this.Array = array;
    }
 
