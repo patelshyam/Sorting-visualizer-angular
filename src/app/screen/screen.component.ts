@@ -15,12 +15,12 @@ export class ScreenComponent implements OnInit {
    Array = [];
 
    // This is the main color of the array bars.
-   PRIMARY_COLOR = 'turquoise';
+   PRIMARY_COLOR = '#0080FF';
 
    // This is the color of array bars that are being compared throughout the animations.
    SECONDARY_COLOR = 'red';
 
-   ANIMATION_SPEED_MS = 10;
+   ANIMATION_SPEED_MS = 1;
 
   clickEventSubscription:Subscription;
 
@@ -54,6 +54,7 @@ export class ScreenComponent implements OnInit {
     for (let i = 0; i < this.NUMBER_OF_ARRAY_BARS; i++) {
       array.push(this.randomIntFromInterval(5, 730));
     }
+
     this.Array = array;
    }
 

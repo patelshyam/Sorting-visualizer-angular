@@ -1,14 +1,15 @@
 let animations = [];
 
 export function getAnimationForMergeSort(unsortedArray){
-  mergeSort(unsortedArray);
+  mergeSort(unsortedArray,0);
   let Animations = getIndexOfAnimations(animations,unsortedArray);
+  console.log(Animations);
   return Animations;
 }
 
 
 
-function mergeSort (unsortedArray) {
+function mergeSort (unsortedArray,startIndex) {
   // No need to sort the array if the array only has one element or empty
   if (unsortedArray.length <= 1) {
     return unsortedArray;
@@ -22,16 +23,18 @@ function mergeSort (unsortedArray) {
 
   // Using recursion to combine the left and right
   return merge(
-    mergeSort(left), mergeSort(right)
+    mergeSort(left,startIndex), mergeSort(right,middle),startIndex
   );
 }
 
 // Merge the two arrays: left and right
-function merge (left, right) {
+function merge (left, right,startIndex) {
   let resultArray = [], leftIndex = 0, rightIndex = 0;
-  let k = leftIndex;
+  let k = startIndex;
   // We will concatenate values into the resultArray in order
+  console.log(k);
   while (leftIndex < left.length && rightIndex < right.length) {
+
       animations.push(["highLight",k,right[rightIndex]]);
       animations.push(["highLight",k,right[rightIndex]]);
 
