@@ -3,7 +3,6 @@ let animations = [];
 export function getAnimationForMergeSort(unsortedArray){
   mergeSort(unsortedArray,0);
   let Animations = getIndexOfAnimations(animations,unsortedArray);
-  console.log(Animations);
   return Animations;
 }
 

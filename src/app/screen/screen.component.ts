@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { Subscription} from 'rxjs';
-import { getAnimationForMergeSort } from './Algorithm';
+import { getAnimationForMergeSort } from './Algo/mergSort.js';
+import { getAnimationsForQuickSort } from './Algo/quickSort.js';
 
 @Component({
   selector: 'app-screen',
@@ -22,6 +23,8 @@ export class ScreenComponent implements OnInit {
 
    ANIMATION_SPEED_MS = 1;
 
+   PIVOT_COLOR = "green";
+
   clickEventSubscription:Subscription;
 
   constructor(private sharedService:SharedService) {
@@ -33,10 +36,11 @@ export class ScreenComponent implements OnInit {
           break;
         }
         case "merg":{
-          this.mergShort();
+          this.mergSort();
           break;
         }
         case "quick":{
+          this.quickSort();
           break;
         }
         case "bubble":{
@@ -50,7 +54,8 @@ export class ScreenComponent implements OnInit {
    }
 
    resetArray(){
-    const array = [];
+    const array = []
+
     for (let i = 0; i < this.NUMBER_OF_ARRAY_BARS; i++) {
       array.push(this.randomIntFromInterval(5, 730));
     }
@@ -58,11 +63,10 @@ export class ScreenComponent implements OnInit {
     this.Array = array;
    }
 
-   mergShort(){
-    let AllBars = document.getElementsByClassName("array-bar");
+   mergSort(){
+    const arrayBars = document.getElementsByClassName('array-bar');
     let animations = getAnimationForMergeSort(this.Array);
     for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
         const [barOneIdx, barTwoIdx] = animations[i];
@@ -81,6 +85,68 @@ export class ScreenComponent implements OnInit {
         }, i * this.ANIMATION_SPEED_MS);
       }
     }
+   }
+
+   quickSort(){
+    console.log(this.Array);
+    let arrayBars = document.getElementsByClassName('array-bar');
+    let animations = getAnimationsForQuickSort(this.Array);
+
+    for(let i = 0; i< animations.length; i++)
+    {
+      let check = animations[i][0];
+      if(check === "pivoton")
+      {
+        let pivotBar = animations[i][1];
+        const barPivotStyle = <HTMLElement>arrayBars[pivotBar];
+        setTimeout(() => {
+         barPivotStyle.style.backgroundColor = this.PIVOT_COLOR;
+        }, i * this.ANIMATION_SPEED_MS);
+      }
+      else if(check === "highLighton")
+      {
+        const [barOneIdx,barTwoIdx] = animations[i].slice(1);
+        const barOneStyle = <HTMLElement>arrayBars[barOneIdx];
+        const barTwoeStyle = <HTMLElement>arrayBars[barTwoIdx];
+
+        setTimeout(() => {
+          barOneStyle.style.backgroundColor = this.SECONDARY_COLOR;
+          barTwoeStyle.style.backgroundColor = this.SECONDARY_COLOR;
+         }, i * this.ANIMATION_SPEED_MS);
+      }
+      else if(check === "highLightoff")
+      {
+        const [barOneIdx,barTwoIdx] = animations[i].slice(1);
+        const barOneStyle = <HTMLElement>arrayBars[barOneIdx];
+        const barTwoeStyle = <HTMLElement>arrayBars[barTwoIdx];
+
+        setTimeout(() => {
+          barOneStyle.style.backgroundColor = this.PRIMARY_COLOR;
+          barTwoeStyle.style.backgroundColor = this.PRIMARY_COLOR;
+         }, i * this.ANIMATION_SPEED_MS);
+      }
+      else if(check === "pivotOff")
+      {
+        let pivotBar = animations[i][1];
+        const barPivotStyle = <HTMLElement>arrayBars[pivotBar];
+        setTimeout(() => {
+         barPivotStyle.style.backgroundColor = this.PRIMARY_COLOR;
+        }, i * this.ANIMATION_SPEED_MS);
+      }
+      else if(check === "swap")
+      {
+        const [barIndexOne,barValueOne,barIndexTwo,barValueTwo] = animations[i].slice(1);
+        const barOneStyle = <HTMLElement>arrayBars[barIndexOne];
+        const barTwoeStyle = <HTMLElement>arrayBars[barIndexTwo];
+
+        setTimeout(() => {
+          barOneStyle.style.height = `${barValueOne}px`;
+          barTwoeStyle.style.height = `${barValueTwo}px`;
+         }, i * this.ANIMATION_SPEED_MS);
+
+      }
+    }
+
    }
 
   ngOnInit() {
