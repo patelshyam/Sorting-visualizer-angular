@@ -3,6 +3,7 @@ import { SharedService } from '../shared.service';
 import { Subscription} from 'rxjs';
 import { getAnimationForMergeSort } from './Algo/mergSort.js';
 import { getAnimationsForQuickSort } from './Algo/quickSort.js';
+import { getAnimationsForBubbleSort } from './Algo/bubbleSort';
 
 @Component({
   selector: 'app-screen',
@@ -11,7 +12,7 @@ import { getAnimationsForQuickSort } from './Algo/quickSort.js';
 })
 export class ScreenComponent implements OnInit {
 
-   NUMBER_OF_ARRAY_BARS = 300;
+   NUMBER_OF_ARRAY_BARS = 150;
 
    Array = [];
 
@@ -21,7 +22,7 @@ export class ScreenComponent implements OnInit {
    // This is the color of array bars that are being compared throughout the animations.
    SECONDARY_COLOR = 'red';
 
-   ANIMATION_SPEED_MS = 1;
+   ANIMATION_SPEED_MS = 10;
 
    PIVOT_COLOR = "green";
 
@@ -44,6 +45,7 @@ export class ScreenComponent implements OnInit {
           break;
         }
         case "bubble":{
+          this.bubbleSort();
           break;
         }
         case "heap":{
@@ -148,6 +150,48 @@ export class ScreenComponent implements OnInit {
     }
 
    }
+
+   bubbleSort()
+   {
+      let animations = getAnimationsForBubbleSort(this.Array);
+      let arrayBars = document.getElementsByClassName('array-bar');
+
+      for(let i = 0; i< animations.length; i++)
+      {
+        const [check,v1,v2,v3,v4] = animations[i].slice();
+        if(check === "HighLightOn")
+        {
+          let barOneStyle = <HTMLElement>arrayBars[v1];
+          let barTwoStyle = <HTMLElement>arrayBars[v2];
+
+          setTimeout(() => {
+            barOneStyle.style.backgroundColor = this.SECONDARY_COLOR;
+            barTwoStyle.style.backgroundColor = this.SECONDARY_COLOR;
+           }, i * this.ANIMATION_SPEED_MS);
+        }
+        else if(check === "HighLightOff")
+        {
+          let barOneStyle = <HTMLElement>arrayBars[v1];
+          let barTwoStyle = <HTMLElement>arrayBars[v2];
+
+          setTimeout(() => {
+            barOneStyle.style.backgroundColor = this.PRIMARY_COLOR;
+            barTwoStyle.style.backgroundColor = this.PRIMARY_COLOR;
+           }, i * this.ANIMATION_SPEED_MS);
+        }
+        else if(check === "Swap")
+        {
+          let barOneStyle = <HTMLElement>arrayBars[v1];
+          let barTwoStyle = <HTMLElement>arrayBars[v3];
+
+          setTimeout(() => {
+            barOneStyle.style.height = `${v2}px`;
+            barTwoStyle.style.height = `${v4}px`;
+           }, i * this.ANIMATION_SPEED_MS);
+        }
+      }
+   }
+
 
   ngOnInit() {
   }
