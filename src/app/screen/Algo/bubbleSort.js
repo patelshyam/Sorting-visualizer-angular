@@ -4,7 +4,9 @@ export function getAnimationsForBubbleSort(array)
 {
   let tempArray = array.slice();
   bubbleSort(tempArray);
-  return animations;
+  let tempAnimations = animations.slice();
+  animations = [];
+  return tempAnimations;
 }
 
 function bubbleSort(array){

@@ -4,6 +4,7 @@ import { Subscription} from 'rxjs';
 import { getMergeSortAnimations } from './Algo/mergSort.js';
 import { getAnimationsForQuickSort } from './Algo/quickSort.js';
 import { getAnimationsForBubbleSort } from './Algo/bubbleSort';
+import { getAnimationsForHeapSort } from './Algo/heapSort';
 
 @Component({
   selector: 'app-screen',
@@ -49,6 +50,7 @@ export class ScreenComponent implements OnInit {
           break;
         }
         case "heap":{
+          this.heapSort();
           break;
         }
       }
@@ -194,7 +196,43 @@ export class ScreenComponent implements OnInit {
 
    heapSort()
    {
+    let animations = getAnimationsForHeapSort(this.Array);
+    let arrayBars = document.getElementsByClassName('array-bar');
 
+    for(let i = 0; i< animations.length; i++)
+    {
+      const [check,v1,v2,v3,v4] = animations[i].slice();
+      if(check === "HighLightOn")
+      {
+        let barOneStyle = <HTMLElement>arrayBars[v1];
+        let barTwoStyle = <HTMLElement>arrayBars[v2];
+
+        setTimeout(() => {
+          barOneStyle.style.backgroundColor = this.SECONDARY_COLOR;
+          barTwoStyle.style.backgroundColor = this.SECONDARY_COLOR;
+         }, i * this.ANIMATION_SPEED_MS);
+      }
+      else if(check === "HighLightOff")
+      {
+        let barOneStyle = <HTMLElement>arrayBars[v1];
+        let barTwoStyle = <HTMLElement>arrayBars[v2];
+
+        setTimeout(() => {
+          barOneStyle.style.backgroundColor = this.PRIMARY_COLOR;
+          barTwoStyle.style.backgroundColor = this.PRIMARY_COLOR;
+         }, i * this.ANIMATION_SPEED_MS);
+      }
+      else if(check === "Swap")
+      {
+        let barOneStyle = <HTMLElement>arrayBars[v1];
+        let barTwoStyle = <HTMLElement>arrayBars[v3];
+
+        setTimeout(() => {
+          barOneStyle.style.height = `${v2}px`;
+          barTwoStyle.style.height = `${v4}px`;
+         }, i * this.ANIMATION_SPEED_MS);
+      }
+    }
    }
   ngOnInit() {
   }
