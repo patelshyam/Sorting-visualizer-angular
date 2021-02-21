@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { Subscription} from 'rxjs';
-import { getAnimationForMergeSort } from './Algo/mergSort.js';
+import { getMergeSortAnimations } from './Algo/mergSort.js';
 import { getAnimationsForQuickSort } from './Algo/quickSort.js';
 import { getAnimationsForBubbleSort } from './Algo/bubbleSort';
 
@@ -67,7 +67,7 @@ export class ScreenComponent implements OnInit {
 
    mergSort(){
     const arrayBars = document.getElementsByClassName('array-bar');
-    let animations = getAnimationForMergeSort(this.Array);
+    let animations = getMergeSortAnimations(this.Array);
     for (let i = 0; i < animations.length; i++) {
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
@@ -192,7 +192,10 @@ export class ScreenComponent implements OnInit {
       }
    }
 
+   heapSort()
+   {
 
+   }
   ngOnInit() {
   }
 

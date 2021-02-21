@@ -1,3 +1,4 @@
+
 let animations = [];
 export function getAnimationsForQuickSort(array)
 {
@@ -10,9 +11,12 @@ export function getAnimationsForQuickSort(array)
 
 function quickSort(low,high,array)
 {
+  //Checking If low is less than High or not
   if(low < high)
   {
+    // Make partation in which on left side all the smaller elemnts of partation and on the right hand side all the greater elements
     let j = partation(low,high,array);
+    // Divinding the array with pivote taken as a partation
     quickSort(low,j,array);
     quickSort(j+1,high,array);
   }
@@ -40,6 +44,7 @@ function partation(low,high,unsortedArray)
     if(i < j)
     {
       swap(i,j,unsortedArray);
+      //Logic for animating highlihts and swaping
       animations.push(["highLighton",i,j]);
       animations.push(["highLightoff",i,j]);
       animations.push(["swap",i,j]);
