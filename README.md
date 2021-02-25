@@ -1,4 +1,4 @@
-# Sorting Visualization
+# Sorting Visualization 📊
 
 ![Screenshot (288)](https://user-images.githubusercontent.com/26683455/108638155-1ddaf900-748e-11eb-8987-57d536d1d0f8.gif)
 
@@ -30,10 +30,10 @@ To see the sorting, simply press the algorithm button in the upper navigation ba
 
 #### Algorithms
 
-- Merge Sort
-- Quick Sort
-- Bubble Sort
-- Heap Sort
+- Merge Sort 👨‍👩‍👧‍👦
+- Quick Sort 🏃 
+- Bubble Sort 💬
+- Heap Sort 📚
 
 [Back To The Top](#sorting-visualization)
 
