@@ -27,34 +27,50 @@ export class ScreenComponent implements OnInit {
 
    PIVOT_COLOR = "green";
 
+
+   NUMBER_OF_SWAP = 0;
+
+   SELECTED_ALGORITHM = "";
+
   clickEventSubscription:Subscription;
 
   constructor(private sharedService:SharedService) {
     this.resetArray();
     this.clickEventSubscription = this.sharedService.getClickEvent().subscribe((shortType)=>{
+      this.NUMBER_OF_SWAP = 0;
       switch(shortType){
         case "re-define":{
           this.resetArray();
           break;
         }
         case "merg":{
+          this.SELECTED_ALGORITHM = "MERGE SORT";
           this.mergSort();
           break;
         }
         case "quick":{
+          this.SELECTED_ALGORITHM = "QUICK SORT";
           this.quickSort();
           break;
         }
         case "bubble":{
+          this.SELECTED_ALGORITHM = "BUBBLE SORT";
           this.bubbleSort();
           break;
         }
         case "heap":{
+          this.SELECTED_ALGORITHM = "HEAP SORT";
           this.heapSort();
           break;
         }
       }
     })
+
+    this.sharedService.getChangeInSize().subscribe((size)=>{
+        this.NUMBER_OF_ARRAY_BARS = size;
+        this.resetArray();
+    });
+
    }
 
    resetArray(){
@@ -86,6 +102,7 @@ export class ScreenComponent implements OnInit {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = <HTMLElement>arrayBars[barOneIdx];
           barOneStyle.style.height = `${newHeight}px`;
+          this.NUMBER_OF_SWAP++;
         }, i * this.ANIMATION_SPEED_MS);
       }
     }
@@ -146,6 +163,7 @@ export class ScreenComponent implements OnInit {
         setTimeout(() => {
           barOneStyle.style.height = `${barValueOne}px`;
           barTwoeStyle.style.height = `${barValueTwo}px`;
+          this.NUMBER_OF_SWAP++;
          }, i * this.ANIMATION_SPEED_MS);
 
       }
@@ -189,6 +207,7 @@ export class ScreenComponent implements OnInit {
           setTimeout(() => {
             barOneStyle.style.height = `${v2}px`;
             barTwoStyle.style.height = `${v4}px`;
+            this.NUMBER_OF_SWAP++;
            }, i * this.ANIMATION_SPEED_MS);
         }
       }
@@ -230,6 +249,7 @@ export class ScreenComponent implements OnInit {
         setTimeout(() => {
           barOneStyle.style.height = `${v2}px`;
           barTwoStyle.style.height = `${v4}px`;
+          this.NUMBER_OF_SWAP++;
          }, i * this.ANIMATION_SPEED_MS);
       }
     }

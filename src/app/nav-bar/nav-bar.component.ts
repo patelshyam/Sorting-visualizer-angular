@@ -8,7 +8,8 @@ import { SharedService } from '../shared.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private sharedService:SharedService) { }
+  constructor(private sharedService:SharedService,
+              private changeSizeSerive:SharedService) { }
 
   ngOnInit() {
   }
@@ -16,5 +17,10 @@ export class NavBarComponent implements OnInit {
   MakeShorting(shortType:String)
   {
     this.sharedService.sendClickEvent(shortType);
+  }
+
+  ChangeSize(changeSize:any)
+  {
+    this.changeSizeSerive.sendSizeChangeEvent(changeSize);
   }
 }

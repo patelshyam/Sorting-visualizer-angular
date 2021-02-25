@@ -1,5 +1,4 @@
 .array-container {
-  position: absolute;
   margin-top: 40px;
   width: 100%;
   text-align: center;
@@ -9,4 +8,30 @@
   width: 4px;
   display: inline-block;
   margin: 0 2px;
+}
+
+.score{
+  position: relative;
+  margin: 10px;
+}
+
+table {
+margin: 0 auto;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
 }
