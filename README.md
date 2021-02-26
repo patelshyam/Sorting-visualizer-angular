@@ -47,7 +47,7 @@ You need angular pre installed. For using this project you can pull this reposit
 
 
 #### Live demo
-[@Click Here](https://patelshyam.github.io/sorting-visualization-demo/)
+[Click Here](https://patelshyam.github.io/sorting-visualization-demo/)
 
 [Back To The Top](#sorting-visualization)
 
