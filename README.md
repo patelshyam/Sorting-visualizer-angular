@@ -45,10 +45,12 @@ To see the sorting, simply press the algorithm button in the upper navigation ba
 #### Installation
 You need angular pre installed. For using this project you can pull this repository and open that repo in command prompt and do npm install to add the node_modules. Now for running int just do `ng serve`.
 
+
+## Live demo
+[@Click Here](https://patelshyam.github.io/sorting-visualization-demo/)
 [Back To The Top](#sorting-visualization)
 
 ---
-
 
 ## License
 
