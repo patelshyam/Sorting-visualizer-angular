@@ -1,4 +1,4 @@
-# Sorting Visualization [Live Demo](https://patelshyam.github.io/sorting-visualization-demo/) 📊
+# Sorting Visualization [Click Here For Live Demo](https://patelshyam.github.io/sorting-visualization-demo/) 📊
 
 ![Screenshot (288)](https://user-images.githubusercontent.com/26683455/108638155-1ddaf900-748e-11eb-8987-57d536d1d0f8.gif)
 
