@@ -92,5 +92,3 @@ SOFTWARE.
 - Clément Mihailescu- [@Clement Mihailescu](https://clementmihailescu.github.io/Sorting-Visualizer/)
 
 [Back To The Top](#sorting-visualization)
-
-
