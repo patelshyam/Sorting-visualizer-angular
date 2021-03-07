@@ -17,7 +17,7 @@
 
 ---
 ## Description
-The difference between sorting algorithms such as Mergesort, Quicksort, Bubblesort and Heapsort is illustrated by this application. An choice to redefine the array is available. The underlying process is that First of all program will generate animations according to the sorting algorithm, then those animations will be transferred to the Array-bars shown on the screen.
+The difference between sorting algorithms such as Mergesort, Quicksort, Bubblesort and Heapsort is illustrated by this application. An choice to redefine the array is available, You can change the size of array as well. The underlying process is that First of all program will generate animations according to the sorting algorithm, then those animations will be transferred to the Array-bars shown on the screen.
 
 To see the sorting, simply press the algorithm button in the upper navigation bar. If you want to see a different algorithm, press redefine the list, and then click the algorithm you want to see again.
 
